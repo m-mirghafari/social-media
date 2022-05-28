@@ -9,12 +9,25 @@ import javax.inject.Inject
 
 class VideosRepositoryImpl @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
+    private val apiMock: ApiMock
 ) : VideosRepository {
 
-    private var videos = MutableSharedFlow<Result<List<VideoData>>>()
+    private var videos = MutableStateFlow<ResultState<List<VideoData>>?>(null)
 
-    override fun getVideos(): Flow<SharedFlow<Result<List<VideoData>>>> {
-        TODO("Not yet implemented")
+    override fun getVideos(): Flow<ResultState<List<VideoData>>> = flow {
+        emit(ResultState.Loading())
+        getVideosFromNetwork()
+
+        videos.collect { videosResult ->
+            videosResult?.let {
+                emit(it)
+            }
+        }
+
+    }.flowOn(ioDispatcher)
+
+    private suspend fun getVideosFromNetwork() {
+        videos.emit(ResultState.Success(apiMock.getVideos()))
     }
 
     override fun updateVideoLikeAndViewCounter(
