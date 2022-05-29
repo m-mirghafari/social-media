@@ -1,27 +1,42 @@
 package com.sky.social.utils
 
 import android.content.Context
-import android.media.MediaCodec
 import android.util.AttributeSet
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.source.DefaultMediaSourceFactory
+import com.google.android.exoplayer2.upstream.DataSource
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
+import com.google.android.exoplayer2.upstream.HttpDataSource
+import com.google.android.exoplayer2.upstream.cache.CacheDataSource
+import com.sky.social.App.Companion.simpleCache
+
 
 class VideoRecyclerView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : RecyclerView(context, attrs, defStyleAttr) {
 
-    private val videoPlayer = ExoPlayer.Builder(context.applicationContext).build().also {
-//        it.repeatMode = Player.REPEAT_MODE_ALL
-        it.videoScalingMode = MediaCodec.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING
-    }
+
+    private val httpDataSourceFactory: HttpDataSource.Factory =
+        DefaultHttpDataSource.Factory().setAllowCrossProtocolRedirects(true)
+
+    private val cacheDataSourceFactory: DataSource.Factory = CacheDataSource.Factory()
+        .setCache(simpleCache)
+        .setUpstreamDataSourceFactory(httpDataSourceFactory)
+
+    private val videoPlayer = ExoPlayer.Builder(context.applicationContext)
+        .setMediaSourceFactory(DefaultMediaSourceFactory(cacheDataSourceFactory))
+        .build()
+
 
     private var currentPlayingPosition = -1
 
     override fun onScrolled(dx: Int, dy: Int) {
         super.onScrolled(dx, dy)
 
-        val firstVisibleViewPosition = (layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition()
+        val firstVisibleViewPosition =
+            (layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition()
         if (firstVisibleViewPosition != currentPlayingPosition && firstVisibleViewPosition > -1) {
             stopLastVideoAndStartPlayTheNewOne(firstVisibleViewPosition)
         }
