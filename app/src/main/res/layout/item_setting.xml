@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/space_large"
+        android:background="@drawable/box_background"
+        android:elevation="@dimen/cardview_default_elevation"
+        android:padding="@dimen/space_normal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtVideoId"
+            style="@style/textView"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnDecreaseLike"
+            android:layout_width="@dimen/button_size"
+            android:layout_height="@dimen/zero_dp"
+            android:background="@drawable/click_circle_ripple"
+            android:padding="@dimen/space_very_small"
+            android:src="@drawable/ic_minus"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/errorColor" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtLikes"
+            style="@style/textView"
+            android:drawableStart="@drawable/ic_view"
+            android:gravity="center"
+            android:textColor="@color/textColorSecondary"
+            android:textSize="@dimen/text_size_small"
+            app:drawableTint="@color/iconsTintColor"
+            app:layout_constraintBottom_toBottomOf="@id/btnDecreaseLike"
+            app:layout_constraintStart_toEndOf="@id/btnDecreaseLike"
+            app:layout_constraintTop_toTopOf="@id/btnDecreaseLike" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnIncreaseLike"
+            android:layout_width="@dimen/button_size"
+            android:layout_height="@dimen/zero_dp"
+            android:background="@drawable/click_circle_ripple"
+            android:padding="@dimen/space_very_small"
+            android:src="@drawable/ic_add"
+            app:layout_constraintBottom_toBottomOf="@id/btnDecreaseLike"
+            app:layout_constraintStart_toEndOf="@id/txtLikes"
+            app:layout_constraintTop_toTopOf="@id/btnDecreaseLike"
+            app:tint="@color/successColor" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnDecreaseView"
+            android:layout_width="@dimen/button_size"
+            android:layout_height="@dimen/zero_dp"
+            android:background="@drawable/click_circle_ripple"
+            android:padding="@dimen/space_very_small"
+            android:src="@drawable/ic_minus"
+            app:layout_constraintBottom_toBottomOf="@id/btnIncreaseView"
+            app:layout_constraintEnd_toStartOf="@id/txtViews"
+            app:layout_constraintTop_toTopOf="@id/btnIncreaseView"
+            app:tint="@color/errorColor" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtViews"
+            style="@style/textView"
+            android:drawableStart="@drawable/ic_like"
+            android:gravity="center"
+            android:textColor="@color/textColorSecondary"
+            android:textSize="@dimen/text_size_small"
+            app:drawableTint="@color/iconsTintColor"
+            app:layout_constraintBottom_toBottomOf="@id/btnIncreaseView"
+            app:layout_constraintEnd_toStartOf="@+id/btnIncreaseView"
+            app:layout_constraintTop_toTopOf="@id/btnIncreaseView" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnIncreaseView"
+            android:layout_width="@dimen/button_size"
+            android:layout_height="@dimen/zero_dp"
+            android:background="@drawable/click_circle_ripple"
+            android:padding="@dimen/space_very_small"
+            android:src="@drawable/ic_add"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/successColor" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
