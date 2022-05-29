@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/box_background"
+        android:layout_margin="@dimen/space_large"
+        android:elevation="@dimen/space_normal">
+
+        <com.google.android.exoplayer2.ui.StyledPlayerView
+            android:id="@+id/playerView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/zero_dp"
+            app:circularflow_radiusInDP="20dp"
+            android:background="@color/videoBackground"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:use_controller="false" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/thumbnailImage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/zero_dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="thumbnailImage, playerView"
+            app:barrierDirection="bottom" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtVideoId"
+            style="@style/textView"
+            android:layout_marginStart="@dimen/space_normal"
+            android:layout_marginTop="@dimen/space_normal"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/barrier" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtLikes"
+            style="@style/textView"
+            android:layout_marginTop="@dimen/space_normal"
+            android:layout_marginBottom="@dimen/space_normal"
+            android:drawableStart="@drawable/ic_like"
+            android:drawablePadding="@dimen/space_very_small"
+            android:textColor="@color/textColorSecondary"
+            android:textSize="@dimen/text_size_small"
+            app:drawableTint="@color/iconsTintColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/txtVideoId"
+            app:layout_constraintTop_toBottomOf="@id/txtVideoId" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtViews"
+            style="@style/textView"
+            android:layout_marginEnd="@dimen/space_normal"
+            android:drawableStart="@drawable/ic_view"
+            android:drawablePadding="@dimen/space_very_small"
+            android:textColor="@color/textColorSecondary"
+            android:textSize="@dimen/text_size_small"
+            app:drawableTint="@color/iconsTintColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txtLikes" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
