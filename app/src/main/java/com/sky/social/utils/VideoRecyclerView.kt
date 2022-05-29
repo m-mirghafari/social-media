@@ -3,11 +3,9 @@ package com.sky.social.utils
 import android.content.Context
 import android.media.MediaCodec
 import android.util.AttributeSet
-import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.exoplayer2.ExoPlayer
-import com.google.android.exoplayer2.Player
 
 class VideoRecyclerView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -31,16 +29,22 @@ class VideoRecyclerView @JvmOverloads constructor(
 
     private fun stopLastVideoAndStartPlayTheNewOne(newPosition: Int) {
         (findViewHolderForAdapterPosition(currentPlayingPosition) as? VideoRecyclerViewViewHolder)?.let { lastViewHolder ->
-            Log.e(">>>>", "stop player on position $currentPlayingPosition")
+//            Log.e(">>>>", "stop player on position $currentPlayingPosition")
             lastViewHolder.stopTheVideo()
         }
 
         (findViewHolderForAdapterPosition(newPosition) as? VideoRecyclerViewViewHolder)?.let { lastViewHolder ->
-            Log.i(">>>>", "play video on position $newPosition")
+//            Log.i(">>>>", "play video on position $newPosition")
             currentPlayingPosition = newPosition
             lastViewHolder.prepareTheVideo(videoPlayer)
             lastViewHolder.playTheVideo()
         }
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        videoPlayer.stop()
+        videoPlayer.release()
     }
 }
 
