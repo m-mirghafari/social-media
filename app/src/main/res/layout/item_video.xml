@@ -6,16 +6,16 @@
         android:id="@+id/layoutItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/box_background"
         android:layout_margin="@dimen/space_large"
+        android:background="@drawable/box_background"
         android:elevation="@dimen/space_normal">
 
         <com.google.android.exoplayer2.ui.StyledPlayerView
             android:id="@+id/playerView"
             android:layout_width="match_parent"
             android:layout_height="@dimen/zero_dp"
-            app:circularflow_radiusInDP="20dp"
             android:background="@color/videoBackground"
+            app:circularflow_radiusInDP="20dp"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -34,8 +34,8 @@
             android:id="@+id/barrier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:constraint_referenced_ids="thumbnailImage, playerView"
-            app:barrierDirection="bottom" />
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="thumbnailImage, playerView" />
 
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -54,6 +54,7 @@
             android:layout_marginBottom="@dimen/space_normal"
             android:drawableStart="@drawable/ic_like"
             android:drawablePadding="@dimen/space_very_small"
+            android:gravity="center"
             android:textColor="@color/textColorSecondary"
             android:textSize="@dimen/text_size_small"
             app:drawableTint="@color/iconsTintColor"
@@ -67,6 +68,7 @@
             android:layout_marginEnd="@dimen/space_normal"
             android:drawableStart="@drawable/ic_view"
             android:drawablePadding="@dimen/space_very_small"
+            android:gravity="center"
             android:textColor="@color/textColorSecondary"
             android:textSize="@dimen/text_size_small"
             app:drawableTint="@color/iconsTintColor"
