@@ -13,10 +13,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sky.social.R
 import com.sky.social.databinding.FragmentHomeBinding
-import com.sky.social.di.MainDispatcher
 import com.sky.social.ui.homeTab.videoAdapter.VideoAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,10 +24,6 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: HomeFragmentVM by viewModels()
-
-    @Inject
-    @MainDispatcher
-    lateinit var mainDispatcher: CoroutineDispatcher
 
     @Inject
     lateinit var adapter: VideoAdapter

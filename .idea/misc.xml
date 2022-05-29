@@ -4,10 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/box_background.xml" value="0.1235" />
+        <entry key="app/src/main/res/drawable/click_circle_ripple.xml" value="0.192" />
         <entry key="app/src/main/res/layout-v23/item_video.xml" value="0.28802083333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19815673828125002" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.14625850340136054" />
+        <entry key="app/src/main/res/layout/item_setting.xml" value="0.3765625" />
         <entry key="app/src/main/res/layout/item_video.xml" value="0.25" />
         <entry key="app/src/main/res/menu/navigation_menu.xml" value="0.1" />
       </map>
