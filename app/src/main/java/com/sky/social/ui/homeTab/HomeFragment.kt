@@ -4,23 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.sky.social.R
-import com.sky.social.data.ResultState
 import com.sky.social.databinding.FragmentHomeBinding
 import com.sky.social.di.MainDispatcher
+import com.sky.social.ui.homeTab.videoAdapter.VideoAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -32,6 +30,9 @@ class HomeFragment : Fragment() {
     @Inject
     @MainDispatcher
     lateinit var mainDispatcher: CoroutineDispatcher
+
+    @Inject
+    lateinit var adapter: VideoAdapter
 
 
     override fun onCreateView(
@@ -46,34 +47,21 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initTheObservers()
+        initAdapter()
     }
 
     private fun initTheObservers() {
         lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 viewModel.videos.collectLatest { result ->
-                    when(result) {
-                        is ResultState.Success -> {
-                            // TODO: submit the adapter
-                            withContext(mainDispatcher) {
-                                binding.showLoading = false
-                            }
-                        }
-                        is ResultState.Error -> {
-                            withContext(mainDispatcher) {
-                                binding.showLoading = false
-                                Toast.makeText(requireContext(), result.error.message, Toast.LENGTH_LONG).show()
-                            }
-                        }
-                        is ResultState.Loading -> {
-                            withContext(mainDispatcher) {
-                                binding.showLoading = true
-                            }
-                        }
-                        null -> {}
-                    }
+                    adapter.submitList(result)
                 }
             }
         }
+    }
+
+    private fun initAdapter() {
+        binding.list.layoutManager = LinearLayoutManager(requireContext())
+        binding.list.adapter = adapter
     }
 }

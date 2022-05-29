@@ -1,6 +1,5 @@
 package com.sky.social.ui.homeTab
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sky.social.data.ResultState
@@ -22,8 +21,11 @@ class HomeFragmentVM @Inject constructor(
     private val homePageUseCase: HomePageUseCase
 ) : ViewModel() {
 
-    private val _videos = MutableStateFlow<ResultState<List<VideoData>>?>(null)
-    val videos: StateFlow<ResultState<List<VideoData>>?> = _videos.asStateFlow()
+    private val _showLoading = MutableStateFlow(false)
+    val showLoading: StateFlow<Boolean> = _showLoading.asStateFlow()
+
+    private val _videos = MutableStateFlow<List<VideoData>?>(null)
+    val videos: StateFlow<List<VideoData>?> = _videos.asStateFlow()
 
     init {
         getVideos()
@@ -32,7 +34,19 @@ class HomeFragmentVM @Inject constructor(
     private fun getVideos() {
         viewModelScope.launch(ioDispatcher) {
             homePageUseCase.getVideos().collect { result ->
-                _videos.emit(result)
+                when (result) {
+                    is ResultState.Success -> {
+                        _showLoading.emit(false)
+                        _videos.emit(result.data)
+                    }
+                    is ResultState.Error -> {
+                        // TODO: handle the error and show some message!
+                        _showLoading.emit(false)
+                    }
+                    is ResultState.Loading -> {
+                        _showLoading.emit(true)
+                    }
+                }
             }
         }
     }

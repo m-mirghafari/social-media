@@ -7,8 +7,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="showLoading"
-            type="Boolean" />
+            name="viewModel"
+            type="com.sky.social.ui.homeTab.HomeFragmentVM" />
 
     </data>
 
@@ -16,11 +16,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
+        <com.sky.social.utils.VideoRecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="@{showLoading ? View.GONE : View.VISIBLE}"
+            android:visibility="@{viewModel.showLoading ? View.GONE : View.VISIBLE}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,7 +28,7 @@
             android:id="@+id/loading"
             android:layout_width="@dimen/progress_view_size"
             android:layout_height="@dimen/progress_view_size"
-            android:visibility="@{showLoading ? View.VISIBLE : View.GONE}"
+            android:visibility="@{viewModel.showLoading ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
