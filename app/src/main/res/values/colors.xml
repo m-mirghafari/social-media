@@ -11,7 +11,11 @@
 
 
     <color name="textColor">#28293d</color>
-    <color name="textColorSecondary">#7f7f7f</color>
+    <color name="textColorSecondary">#676767</color>
+
+    <color name="videoBackground">#000000</color>
+    <color name="greyVeryLight">#E6E3E3</color>
+    <color name="iconsTintColor">#9E9A9A</color>
 
 
 </resources>
