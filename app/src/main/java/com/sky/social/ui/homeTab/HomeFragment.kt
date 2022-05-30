@@ -35,6 +35,7 @@ class HomeFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.lifecycleOwner = this
+        binding.viewModel = viewModel
         return binding.root
     }
 
